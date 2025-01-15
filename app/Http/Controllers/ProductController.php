@@ -15,6 +15,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
+use Barryvdh\DomPDF\Facade\PDF;
+
 class ProductController extends Controller
 {
     /**
@@ -154,4 +156,28 @@ class ProductController extends Controller
         //redirect to index
         return redirect()->route('products.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
+    public function printPdfproducts()
+    {
+        $products = Product::get();
+        $data = [
+            'title' => 'LIST PRODUCT',
+            'date' => date('m/d/Y'),
+            'products' => $products
+        ];
+        $pdf = PDF::loadview('productspdf', $data);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('Data Product.pdf', array("attachment"
+        => false));
+    }
+    public function productsExcel()
+    {
+        $products = Product::get();
+        $data = [
+            'title' => 'Welcome To fti.uniska-bjm.ac.id',
+            'date' => date('m/d/y'),
+            'products' => $products
+        ];
+        return view('productsexcel', $data);
+    }
+    
 }

@@ -9,6 +9,10 @@
     </ol>
     <div class="card mb-4">
         <div class="card-body">
+        <div class="float-end">
+                <a href="{{route('printcategories')}}" class="btn btn-md btn-warning mb-3">PRINT CATEGORY</a>
+                <a href="{{route('exportcategories')}}" class="btn btn-md btn-danger mb-3">Export CATEGORY</a>
+            </div>
             <a href="{{ route('categories.create') }}" class="btn btn-md btn-success mb-3">ADD CATEGORY</a>
             <div class="row">
                 <table class="table table-bordered data-table">

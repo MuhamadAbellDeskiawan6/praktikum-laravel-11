@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class CategoryController extends Controller
 {
@@ -91,5 +92,28 @@ class CategoryController extends Controller
         return view('categories.show', compact('category'));
     }
 
+    public function printPdfcategories()
+    {
+        $categories = Category::get();
+        $data = [
+            'title' => 'LIST KATEGORI',
+            'date' => date('m/d/Y'),
+            'categories' => $categories
+        ];
+        $pdf = PDF::loadview('categoriespdf', $data);
+        $pdf->setPaper('A4', 'landscape');
+        return $pdf->stream('Data Kategori.pdf', array("attachment"
+        => false));
+    }
+    public function categoriesExcel()
+    {
+        $categories = Category::get();
+        $data = [
+            'title' => 'Welcome To fti.uniska-bjm.ac.id',
+            'date' => date('m/d/y'),
+            'categories' => $categories
+        ];
+        return view('categoriesexcel', $data);
+    }
     
 }

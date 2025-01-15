@@ -9,6 +9,10 @@
     </ol>
     <div class="card mb-4">
         <div class="card-body">
+        <div class="float-end">
+                <a href="{{route('printproducts')}}" class="btn btn-md btn-warning mb-3">PRINT PRODUCT</a>
+                <a href="{{route('exportproducts')}}" class="btn btn-md btn-danger mb-3">Export PRODUCT</a>
+            </div>
             <a href="{{ route('products.create') }}" class="btn btn-md
 btn-success mb-3">ADD PRODUCT</a>
             <div class="row">
